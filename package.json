@@ -1,0 +1,30 @@
+{
+  "name": "handheldhexuploader",
+  "version": "1.0.0",
+  "description": "Mobile hex uploader",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "nodemon index.js",
+    "prod": "npx forever index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FracktalWorks/HandheldHexUploader.git"
+  },
+  "author": "Harsha Alva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FracktalWorks/HandheldHexUploader/issues"
+  },
+  "homepage": "https://github.com/FracktalWorks/HandheldHexUploader#readme",
+  "dependencies": {
+    "avrgirl-arduino": "^2.2.7",
+    "bootstrap": "^4.1.3",
+    "express": "^4.16.3",
+    "font-awesome": "^4.7.0",
+    "forever": "^0.15.3",
+    "jquery": "^3.3.1",
+    "socket.io": "^2.1.1"
+  }
+}

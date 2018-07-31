@@ -1,0 +1,32 @@
+html, body {
+  /* To make use of full height of page*/
+  min-height: 100%;
+  margin: 0;
+}
+
+* {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.container-fluid {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.form-group.row {
+  margin-bottom: 1.1rem;
+}
+
+.uploadForm {
+  margin-top: 1rem;
+}
+
+.loader {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+div.radio input[type="radio"] {
+  margin-right: 1rem;
+}

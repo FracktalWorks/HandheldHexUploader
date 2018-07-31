@@ -1,0 +1,146 @@
+<!doctype html>  
+<html lang="en">  
+	<head>
+		<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/style.css">
+
+		<script src="/jquery/dist/jquery.js"></script>
+		<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+	</head>
+
+	<body>
+		<div class="container-fluid">	
+			<h4>Hex Uploader</h4>
+			<form class="uploadForm">
+				<div class="form-group row">
+						<label for="comPort" class="col-2 col-form-label">Port</label>
+						
+						<div class="col-8">
+							<select class="form-control custom-select no-select" id="comPort">
+
+							</select>
+						</div>
+						
+						<div class="col">
+							<button type="button" class="btn btn-secondary btn-block" id="refreshPorts"><span class="fa fa-refresh"></span></button>
+						</div>
+
+				</div>
+
+				<div class="form-group row">
+						<label for="version" class="col-2 col-form-label">Version</label>
+						
+						<div class="col-8">
+							<input class="form-control-plaintext" type="text" placeholder="Date" readonly id="version">
+						</div>
+
+						<div class="col">
+							<button type="button" class="btn btn-secondary btn-block" id="update"><span class="fa fa-cloud-download"></span></button>
+						</div>
+				</div>
+
+				<div class="form-group row">
+						<label for="variant" class="col-2 col-form-label">Variant</label>
+						
+						<div class="col-10">
+							<select class="form-control custom-select no-select" id="variant">
+								<option value="0">GLCD</option>
+								<option value="1">GLCD_HB</option>
+								<option value="2">RPI</option>
+								<option value="3">RPI_E</option>
+								<option value="4">PRO_SINGLE</option>
+								<option value="5">PRO_DUAL</option>
+							</select>
+						</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col">
+						<button type="button" class="btn btn-success btn-lg btn-block" disabled id="upload">Upload Hex</button>
+					</div>
+				</div>
+			</form>
+
+			<!-- Waiting modal dialog -->
+			<div class="modal fade" id="waitDialog" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						
+						<div class="modal-header">
+							<h5 class="modal-title">Waiting...</h5>
+						</div>
+						
+						<div class="modal-body"> 
+							<div class="container-fluid">
+
+								<div class="row">
+									<div class="col" id="waitDialogText">
+										
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col">
+										<img src="/ajax-loader.gif" class="loader img-fluid" alt="waiting">
+									</div>
+								</div>
+
+							</div>
+						</div>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Output modal dialog -->
+		<div class="modal fade" id="outputDialog" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+					
+						<div class="modal-body" id="outputDialogText"> 
+
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Option picker modal dialog -->
+		<div class="modal fade" id="optionsDialog" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+
+						<div class="modal-body"> 
+							<div class="container-fluid" id="optionsDialogOpts">
+
+								<div class="radio">
+									<label><input type="radio" name="optradio1" checked>Option 1</label>
+								</div>
+
+								<div class="radio">
+									<label><input type="radio" name="optradio1">Option 2</label>
+								</div>
+
+								<div class="radio">
+									<label><input type="radio" name="optradio1">Option 3</label>
+								</div> 
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/script.js"></script>
+	</body>
+</html>  
