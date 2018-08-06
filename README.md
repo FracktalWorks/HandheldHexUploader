@@ -5,7 +5,7 @@ Mobile Marlin hex uploader for Manufacturing
 
 ## Install Node.js on Raspberry Pi 3
 1. `sudo apt-get update`
-2. `sudo apt-get dist-upgrade`
+2. ~~`sudo apt-get dist-upgrade`~~
 3. `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
 4. `sudo apt-get install -y nodejs`
 5. `node -v`
@@ -22,7 +22,7 @@ Mobile Marlin hex uploader for Manufacturing
 2. `cd HandheldHexUploader`
 3. `npm i`
 4. `sudo chmod +x install.sh`
-5. `./install.sh`
+5. `sudo ./install.sh`
 
 ---
 

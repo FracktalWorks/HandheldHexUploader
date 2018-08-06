@@ -17,7 +17,7 @@ sudo npm run prod &
 # Start chromium in kiosk mode
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/pi/.config/chromium-browser/Default/Preferences
 sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium-broswer/Default/Preferences
-chromium-browser --kiosk --incognito --start-maximized --noerrdialogs --disable-translate --disable-infobars http://localhost:3000/
+chromium-browser --kiosk --incognito --start-maximized --noerrdialogs --disable-translate --disable-infobars --no-sandbox http://localhost:3000/
 
 # invoke global X session script
 . /etc/X11/Xsession

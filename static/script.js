@@ -52,7 +52,11 @@ socket.on('connect', function(data) {
 
 socket.on('retVersion', function(data) {
   console.log('retVersion: ' + data);
-  $('#version').val(data);
+  if (!data) {
+    $('#version').val("Error");
+    $('#upload').prop("disabled", true);
+  } else
+    $('#version').val(data);
 });
 
 socket.on('updateHexDone', function(data) {
