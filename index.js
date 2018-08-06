@@ -10,4 +10,4 @@ app.use(express.static(__dirname + '/static'));
 
 io.on('connection', socket_server(io));
 
-server.listen(80);  
+server.listen(3000);  
