@@ -12,7 +12,7 @@ cat > "/etc/X11/xinit/xinitrc" <<EOF
 
 # Run server
 cd /home/pi/HandheldHexUploader
-npm run prod &
+sudo npm run prod &
 
 # Start chromium in kiosk mode
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/pi/.config/chromium-browser/Default/Preferences
@@ -24,5 +24,5 @@ chromium-browser --kiosk --incognito --start-maximized --noerrdialogs --disable-
 
 EOF
 
-read -p "Press enter to reboot"
+echo "Rebooting now...."
 reboot now
