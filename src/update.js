@@ -25,7 +25,7 @@ update.version = function() {
 };
 
 update.pullLatestHex = function(cb) {
-  exec('git pull', {
+  exec('git pull origin master', {
     cwd: constants.hexDir
   }, function(error, stdout, stderr) {
     if (error) 
