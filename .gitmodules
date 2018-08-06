@@ -1,3 +1,3 @@
 [submodule "Julia2018MarlinHex"]
 	path = Julia2018MarlinHex
-	url = git@github.com:FracktalWorks/Julia2018MarlinHex.git
+	url = https://github.com/FracktalWorks/Julia2018MarlinHex.git
