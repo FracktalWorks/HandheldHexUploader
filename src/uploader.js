@@ -27,7 +27,10 @@ uploader.getPorts = function(cb) {
         cb(err, null);
       } else {
         console.log(ports);
-        const op = ports.map(function(port) {
+        const op = ports.filter(function(port) {
+          // console.log(port.comName);
+          return port.comName.search(constants.RegexExcludedPorts) == -1;
+        }).map(function(port) {
           return port.comName;
         });
         cb(false, op);
