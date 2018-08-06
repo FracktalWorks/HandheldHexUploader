@@ -1,5 +1,6 @@
 const update = require('./update');
 const uploader = require('./uploader');
+const device = require('./device');
 const constants = require('./constants');
 
 module.exports = function(io) {
@@ -53,6 +54,15 @@ module.exports = function(io) {
         setTimeout(function() { 
           io.emit('uploadDone', ret);
         }, 500);
+      });
+    });
+
+    // shutdown
+    socket.on('shutdown', function(err){
+      console.log('shutdown');
+
+      device.shutdown(function(err) {
+        io.emit('shutdownDone', err);
       });
     });
   };

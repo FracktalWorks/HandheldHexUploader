@@ -26,7 +26,7 @@ uploader.getPorts = function(cb) {
       if (err) {
         cb(err, null);
       } else {
-        // console.log(ports);
+        console.log(ports);
         const op = ports.map(function(port) {
           return port.comName;
         });

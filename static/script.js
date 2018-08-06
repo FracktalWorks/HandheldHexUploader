@@ -40,8 +40,17 @@ function hideDialogs() {
 
   $('#optionsDialog').modal('hide');
   $('#optionsDialogOpts').html('');
+
+  $('#shutdownDialog').modal('hide');
 }
 
+function showShutdownDialog() {
+  $('#confirm-shutdown').off();
+  $('#shutdownDialog').modal({backdrop: 'static', keyboard: false})
+  .one('click', '#confirm-shutdown', function(e) {
+    socket.emit('shutdown', '');
+  });
+}
 
 /** Socket event callbacks **/
 
@@ -112,6 +121,17 @@ socket.on('uploadDone', function(op) {
   }
 });
 
+socket.on('shutdownDone', function(err) {
+  console.log('shutdownDone');
+  console.info(err);
+
+  hideDialogs();
+
+  if (err)
+    showOutputDialog("Failed to shut down!");
+  else
+    showWaitDialog("Shutting down..");
+});
 
 
 /** DOM event listeners **/
@@ -144,4 +164,8 @@ $('#upload').click(function() {
     showWaitDialog("Uploading hex..");
     socket.emit('upload', data);
   }
+});
+
+$('#shutdown').click(function() {
+  showShutdownDialog();
 });
