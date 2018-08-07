@@ -7,7 +7,8 @@ function showWaitDialog(content) {
 
 function showOutputDialog(content) {
   $('#outputDialogText').html(content);
-  $('#outputDialog').modal({backdrop: 'static', keyboard: false});
+  // $('#outputDialog').modal({backdrop: 'static', keyboard: false});
+  $('#outputDialog').modal();
 }
 
 function showOptionsDialog(target) {
@@ -150,7 +151,7 @@ $('#refreshPorts').click(function() {
 });
 
 $('#update').click(function() {
-  showWaitDialog("Updating hex files..");
+  showWaitDialog("Downloading latest firmware files...");
   socket.emit('updateHex', '');
 });
 
@@ -161,7 +162,9 @@ $('#upload').click(function() {
       optCode: $('#variant').val()
     };
 
-    showWaitDialog("Uploading hex..");
+    var selText = $("#variant").children("option").filter(":selected").text();
+
+    showWaitDialog("Uploading firmware for <b>" + selText + "</b>...");
     socket.emit('upload', data);
   }
 });

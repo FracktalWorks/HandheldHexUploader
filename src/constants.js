@@ -6,6 +6,8 @@ constants.hexDir = path.join(__dirname, '../', 'Julia2018MarlinHex');
 
 constants.shortVariants = ["J18GX", "J18GB", "J18RX", "J18RE", "J18PS", "J18PD"];
 
-constants.RegexExcludedPorts = /tty(S|AMA)\d+/g;
+// constants.RegexExcludedPorts = /tty(S|AMA)\d+/g;
+
+constants.RegexPorts = /(\/dev\/ttyUSB|COM)\d+/g;
 
 module.exports = constants;

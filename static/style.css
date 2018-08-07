@@ -14,6 +14,11 @@ html, body {
   padding-bottom: 0.7rem;
 }
 
+.btn-success:disabled {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
 .form-group.row {
   margin-bottom: 1.1rem;
 }
@@ -29,4 +34,19 @@ html, body {
 
 div.radio input[type="radio"] {
   margin-right: 1rem;
+}
+
+#optionsDialogOpts .radio {
+  border-bottom: solid 1px #bbb;
+  padding-top: 0.3rem;
+}
+
+#optionsDialogOpts .radio:first-of-type {
+  border-top: solid 1px #bbb;
+}
+
+#optionsDialogOpts .radio label {
+  margin-bottom: 0;
+  padding-left: 0.8rem;
+  padding-bottom: 0.3rem;
 }
