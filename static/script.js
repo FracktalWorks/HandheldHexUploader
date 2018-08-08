@@ -53,6 +53,11 @@ function showShutdownDialog() {
   $('#shutdownDialog').modal({
     backdrop: 'static', keyboard: false
   }).one('click', '#confirm-shutdown', function(e) {
+    hideAllDialogs();
+    showWaitDialog("Shutting down..");
+    setTimeout(function() {
+      window.location.reload(true);
+    }, 5000);
     socket.emit('shutdown', '');
   });
 }
