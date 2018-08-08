@@ -116,7 +116,7 @@ socket.on('refreshPortsDone', function(data) {
       showOutputDialog(data.err);
     else {
       if (data.ports.length == 0 ) {
-        return showOutputDialog("No devices found!");
+        return showOutputDialog("No USB-Serial devices found!");
       }
 
       $.each(data.ports, function(key, value) {
