@@ -57,8 +57,19 @@ module.exports = function(io) {
       });
     });
 
+    // wifi setup
+    socket.on('wifi', function(data) {
+      console.log('wifi');
+
+      device.setupWifi(data.ssid, data.password, function(err) {
+        setTimeout(function() { 
+          io.emit('wifiDone', err);
+        }, 500);
+      });
+    });
+
     // shutdown
-    socket.on('shutdown', function(err){
+    socket.on('shutdown', function(){
       console.log('shutdown');
 
       device.shutdown(function(err) {

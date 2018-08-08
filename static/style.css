@@ -14,7 +14,7 @@ html, body {
   padding-bottom: 0.7rem;
 }
 
-.btn-success:disabled {
+#upload:disabled {
   background-color: #6c757d;
   border-color: #6c757d;
 }

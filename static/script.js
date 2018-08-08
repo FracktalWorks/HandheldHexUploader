@@ -7,8 +7,8 @@ function showWaitDialog(content) {
 
 function showOutputDialog(content) {
   $('#outputDialogText').html(content);
-  // $('#outputDialog').modal({backdrop: 'static', keyboard: false});
-  $('#outputDialog').modal();
+  $('#outputDialog').modal({backdrop: 'static', keyboard: false});
+  // $('#outputDialog').modal();
 }
 
 function showOptionsDialog(target) {
@@ -32,6 +32,30 @@ function showOptionsDialog(target) {
   $('#optionsDialog').modal({backdrop: 'static', keyboard: false});
 }
 
+function showWifiDialog() {
+  $('#confirm-wifi').off();
+  $('#wifiDialog').modal({
+    backdrop: 'static', keyboard: false
+  }).one('click', '#confirm-wifi', function(e) {
+    var data = {
+      ssid: $("#ssid").val(),
+      password: $("#password").val()
+    };
+
+    hideDialogs();
+    showWaitDialog("Saving WiFi credentials and restarting..");
+    socket.emit('wifi', data);
+  });
+}
+
+function showShutdownDialog() {
+  $('#confirm-shutdown').off();
+  $('#shutdownDialog').modal({backdrop: 'static', keyboard: false})
+  .one('click', '#confirm-shutdown', function(e) {
+    socket.emit('shutdown', '');
+  });
+}
+
 function hideDialogs() {
   $('#waitDialog').modal('hide');
   $('#waitDialogText').html('');
@@ -42,15 +66,9 @@ function hideDialogs() {
   $('#optionsDialog').modal('hide');
   $('#optionsDialogOpts').html('');
 
-  $('#shutdownDialog').modal('hide');
-}
+  $('#wifiDialog').modal('hide');
 
-function showShutdownDialog() {
-  $('#confirm-shutdown').off();
-  $('#shutdownDialog').modal({backdrop: 'static', keyboard: false})
-  .one('click', '#confirm-shutdown', function(e) {
-    socket.emit('shutdown', '');
-  });
+  $('#shutdownDialog').modal('hide');
 }
 
 /** Socket event callbacks **/
@@ -134,6 +152,16 @@ socket.on('shutdownDone', function(err) {
     showWaitDialog("Shutting down..");
 });
 
+socket.on('wifiDone', function(op) {
+  console.log('wifiDone');
+  console.info(op);
+
+  hideDialogs();
+
+  showOutputDialog(op);
+
+});
+
 
 /** DOM event listeners **/
 $('select.no-select').on('mousedown', function(e) {
@@ -148,6 +176,10 @@ $('select.no-select').on('mousedown', function(e) {
 $('#refreshPorts').click(function() {
   showWaitDialog("Refreshing ports..");
   socket.emit('refreshPorts', '');
+});
+
+$('#wifi').click(function() {
+  showWifiDialog();
 });
 
 $('#update').click(function() {
