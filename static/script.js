@@ -7,8 +7,8 @@ function showWaitDialog(content) {
 
 function showOutputDialog(content) {
   $('#outputDialogText').html(content);
-  $('#outputDialog').modal({backdrop: 'static', keyboard: false});
-  // $('#outputDialog').modal();
+  // $('#outputDialog').modal({backdrop: 'static', keyboard: false});
+  $('#outputDialog').modal();
 }
 
 function showOptionsDialog(target) {
@@ -26,7 +26,7 @@ function showOptionsDialog(target) {
   $('.optButton').click(function() {
     // console.log($(this).val());
     $(target).val($(this).val());
-    hideDialogs();
+    hideAllDialogs();
   });
 
   $('#optionsDialog').modal({backdrop: 'static', keyboard: false});
@@ -41,34 +41,35 @@ function showWifiDialog() {
       ssid: $("#ssid").val(),
       password: $("#password").val()
     };
-
-    hideDialogs();
+  
+    hideAllDialogs();
     showWaitDialog("Saving WiFi credentials and restarting..");
     socket.emit('wifi', data);
-  });
+  });;
 }
 
 function showShutdownDialog() {
   $('#confirm-shutdown').off();
-  $('#shutdownDialog').modal({backdrop: 'static', keyboard: false})
-  .one('click', '#confirm-shutdown', function(e) {
+  $('#shutdownDialog').modal({
+    backdrop: 'static', keyboard: false
+  }).one('click', '#confirm-shutdown', function(e) {
     socket.emit('shutdown', '');
   });
 }
 
-function hideDialogs() {
-  $('#waitDialog').modal('hide');
-  $('#waitDialogText').html('');
+function hideDialog(id, dataId = null) {
+  $('#' + id).modal('hide');
+  $('#' + id).data('bs.modal', null);
+  if (!dataId)
+  $('#' + dataId).html('');
+}
 
-  $('#outputDialog').modal('hide');
-  $('#outputDialogText').html('');
-
-  $('#optionsDialog').modal('hide');
-  $('#optionsDialogOpts').html('');
-
-  $('#wifiDialog').modal('hide');
-
-  $('#shutdownDialog').modal('hide');
+function hideAllDialogs() {
+  hideDialog('waitDialog', 'waitDialogText');
+  hideDialog('outputDialog', 'outputDialogText');
+  hideDialog('optionsDialog', 'optionsDialogText');
+  hideDialog('wifiDialog');
+  hideDialog('shutdownDialog');
 }
 
 /** Socket event callbacks **/
@@ -89,7 +90,7 @@ socket.on('retVersion', function(data) {
 
 socket.on('updateHexDone', function(data) {
   console.log('updateHexDone: ' + data);
-  hideDialogs();
+  hideAllDialogs();
   showOutputDialog(data);
 });
 
@@ -100,7 +101,7 @@ socket.on('refreshPortsDone', function(data) {
   var comPort = $("#comPort");
   comPort.empty();
 
-  hideDialogs();
+  hideAllDialogs();
   $('#upload').prop("disabled", true);
 
   if (!data)
@@ -128,7 +129,7 @@ socket.on('uploadDone', function(op) {
   console.log('uploadDone');
   console.info(op);
 
-  hideDialogs();
+  hideAllDialogs();
 
   if (!op)
     showOutputDialog("No data received.");
@@ -140,14 +141,14 @@ socket.on('uploadDone', function(op) {
   }
 });
 
-socket.on('shutdownDone', function(err) {
+socket.on('shutdownDone', function(op) {
   console.log('shutdownDone');
-  console.info(err);
+  console.info(op);
 
-  hideDialogs();
+  hideAllDialogs();
 
-  if (err)
-    showOutputDialog("Failed to shut down!");
+  if (op)
+    showOutputDialog(op);
   else
     showWaitDialog("Shutting down..");
 });
@@ -156,7 +157,7 @@ socket.on('wifiDone', function(op) {
   console.log('wifiDone');
   console.info(op);
 
-  hideDialogs();
+  hideAllDialogs();
 
   showOutputDialog(op);
 
@@ -178,14 +179,27 @@ $('#refreshPorts').click(function() {
   socket.emit('refreshPorts', '');
 });
 
-$('#wifi').click(function() {
-  showWifiDialog();
-});
-
 $('#update').click(function() {
   showWaitDialog("Downloading latest firmware files...");
   socket.emit('updateHex', '');
 });
+
+$('#wifi').click(function() {
+  showWifiDialog();
+});
+
+/*
+$('#confirm-wifi').click(function(e) {
+  var data = {
+    ssid: $("#ssid").val(),
+    password: $("#password").val()
+  };
+
+  hideAllDialogs();
+  showWaitDialog("Saving WiFi credentials and restarting..");
+  socket.emit('wifi', data);
+});
+*/
 
 $('#upload').click(function() {
   if ($('#comPort').val() && $('#variant').val()) {

@@ -9,8 +9,11 @@ const device = {};
 device.shutdown = function(cb) {
   exec('sudo shutdown -h now', {}, function(error, stdout, stderr) {
     console.log("device.shutdown");
-    console.log(error ? stdout : stderr);
-    cb(error);
+    if (stdout)
+      console.log(stdout);
+    if (stderr)
+      console.log(stderr);
+    cb(error ? "Failed to shut down!" : false);
   });
 };
 
