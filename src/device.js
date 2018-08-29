@@ -31,4 +31,11 @@ device.setupWifi = function(ssid, password, cb) {
   });
 };
 
+device.getIp = function() {
+	exec('ifconfig wlan0 | grep -oE "inet addr:([0-9.]+)\b" | sed -rn "s/inet addr:([0-9.]+)/\1/p"', {},
+	function(error, stdout, stderr) {
+		
+	});
+}
+
 module.exports = device;

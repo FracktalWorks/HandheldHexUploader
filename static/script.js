@@ -8,7 +8,8 @@ function showWaitDialog(content) {
 function showOutputDialog(content) {
   $('#outputDialogText').html(content);
   // $('#outputDialog').modal({backdrop: 'static', keyboard: false});
-  $('#outputDialog').modal();
+	$('#outputDialog').modal();
+	setTimeout(function() { hideDialog('outputDialog', 'outputDialogText'); }, 10000);
 }
 
 function showOptionsDialog(target) {
