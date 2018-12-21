@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 cat > "/etc/X11/xinit/xinitrc" <<EOF
 # /etc/X11/xinit/xinitrc

@@ -27,7 +27,7 @@ device.setupWifi = function(ssid, password, cb) {
   exec('sh wifi.sh "' + ssid + '" "' + password + '"', {}, function(error, stdout, stderr) {
     console.log("device.setupWifi");
     console.log(error ? stdout : stderr);
-    cb(error ? "Failed to save WiFi credentials!" : "WiFi credentials saved.");
+    cb(error ? "Failed to save WiFi credentials!" : "WiFi credentials saved: " + stdout.toString());
   });
 };
 

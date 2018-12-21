@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 pkill -15 Xorg
 npx forever stopall

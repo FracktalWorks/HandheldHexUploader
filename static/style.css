@@ -14,10 +14,12 @@ html, body {
   padding-bottom: 0.7rem;
 }
 
-
-#upload:disabled {
-  background-color: #6c757d;
-  border-color: #6c757d;
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: auto;
+    overflow-y: auto;
 }
 
 .form-group.row {
@@ -50,4 +52,9 @@ div.radio input[type="radio"] {
   margin-bottom: 0;
   padding-left: 0.8rem;
   padding-bottom: 0.3rem;
+}
+
+#upload:disabled {
+	background-color: #6c757d;
+	border-color: #6c757d;
 }
